@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   background-color: #fff;
-  color: rgb(238, 236, 236);
+  color: rgb(255, 255, 255);
 }
 
 body {
@@ -24,7 +24,7 @@ rect:hover {
 }
 
 svg {
-  background-color: 424242;
+  background-color:;
 }
 
 g {
@@ -49,15 +49,10 @@ h5 {
   align-items: top;
 }
 
-#tooltip {
+div.tooltip {
   background-color: white;
-  position: absolute;
+  position: relative;
   border-radius: 5px;
   padding: 5px;
-  display: flex;
-  /* color: black; */
   justify-content: center;
-  align-items: top;
-  width: fit-content;
-  height: fit-content;
 }

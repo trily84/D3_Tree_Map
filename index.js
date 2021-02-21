@@ -12,13 +12,14 @@ function createBar(data) {
     var h = 500
     var padding = 50
 
-    console.log(parseInt(data[0].Time.split(":")[0])*60 + parseInt(data[0].Time.split(":")[1]))
+    // console.log(parseInt(data[0].Time.split(":")[0])*60 + parseInt(data[0].Time.split(":")[1]))
 
     // create svg element to contain everything relate to bar chart
     var svg = d3.select("body")
                 .append("svg")
+                .attr("id", "svg")
                 .attr("width", w)
-                .attr("height", h)           
+                .attr("height", h)              
     
     // create legend
     var legend = d3
@@ -35,7 +36,14 @@ function createBar(data) {
     .style("color", "white")
     .append("text")
     .html("No doping allegations <br>")
-    .style("color", "white");            
+    .style("color", "white");     
+    
+    var div = d3
+    .select('body')
+    .append('div')
+    .attr('class', 'tooltip')
+    .attr('id', 'tooltip')
+    .style('opacity', 0);   
 
     var minSecParse = d3.timeParse("%M:%S");
     var timeFormat = d3.timeFormat("%M:%S");
@@ -79,18 +87,21 @@ function createBar(data) {
         else return "white"
     })
     .on("mouseover", function (event, d) {
-        console.log(d); 
+        // console.log(d); 
         // console.log(d3.pointer(event))
         // var x = d3.pointer(event)[0]
         // var y = d3.pointer(event)[1]
-        tooltip.style.opacity = 100
-        tooltip.innerHTML = d.Name + " " + "(" + d.Nationality + ")" + "<br>" + "Year:" + " " + d.Year + " " + "Time: " + d.Time
-        tooltip.style.left = xScale(d.Year) + 60 + "px"
-        tooltip.style.top = h - yScale(minSecParse(d["Time"])) + 90 + "px"
-        tooltip.style.color = d.Doping? "orange": "black"
+        div.style("opacity", .9)
+        div.html(d.Name + " "
+        + "(" + d.Nationality + ")" + "<br>" 
+        + "Year:" + " " + d.Year + " " 
+        + "Time: " + d.Time)
+        div.style("left", xScale(d.Year) - 100 + "px")
+        div.style("top", h - yScale(minSecParse(d["Time"])) - 500 + "px")
+        div.style("color", d.Doping? "orange": "black")
     })
     .on("mouseout", function(event, d) {
-        tooltip.style.opacity = 0
+        div.style.opacity = 0
       })
 
     // create x axis
