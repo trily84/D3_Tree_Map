@@ -91,7 +91,7 @@ function createBar(data) {
         // console.log(d3.pointer(event))
         // var x = d3.pointer(event)[0]
         // var y = d3.pointer(event)[1]
-        div.style("opacity", .9)
+        div.style("opacity", 1)
         div.html(d.Name + " "
         + "(" + d.Nationality + ")" + "<br>" 
         + "Year:" + " " + d.Year + " " 
@@ -101,7 +101,7 @@ function createBar(data) {
         div.style("color", d.Doping? "orange": "black")
     })
     .on("mouseout", function(event, d) {
-        div.style.opacity = 0
+        div.style("opacity", 0)
       })
 
     // create x axis
