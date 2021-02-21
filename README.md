@@ -1,4 +1,5 @@
-# D3_Bar_Chart
-Bar Chart Visualization using D3 library
+# D3_Scatterplot
 
-https://trily84.github.io/D3_Bar_Chart/
+Scatterplot Visualization using D3 library
+
+https://trily84.github.io/D3_Scatterplot/
