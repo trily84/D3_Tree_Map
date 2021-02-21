@@ -87,7 +87,7 @@ function createBar(data) {
         else return "white"
     })
     .on("mouseover", function (event, d) {
-        // console.log(d); 
+        console.log(d); 
         // console.log(d3.pointer(event))
         // var x = d3.pointer(event)[0]
         // var y = d3.pointer(event)[1]
