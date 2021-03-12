@@ -1,122 +1,118 @@
 // fetch data from json file
-fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json')
+fetch('/global-temperature.json')
 	.then(response => response.json())
 	.then(response => {
-        const data = response
-        createBar(data)
-	})
+        const baseTemp = response.baseTemperature
+        const data = response.monthlyVariance
+        createBar(data, baseTemp)
+    })
 
-function createBar(data) { 
 
-    var w = 500
-    var h = 500
-    var padding = 50
+function createBar(data, baseTemp) { 
 
-    // console.log(parseInt(data[0].Time.split(":")[0])*60 + parseInt(data[0].Time.split(":")[1]))
+    // create title using base temperature provided in JSON
+    document.getElementById("baseTemp").innerHTML = "1753 - 2015 Base Temperature: " + baseTemp + "&#176; " + "C"
 
-    // create svg element to contain everything relate to bar chart
+    var w = 900
+    var h = 600
+    var padding = 100
+
+    // console.log(data)
+
+    // create svg element to contain everything relate to the heat bars
     var svg = d3.select("body")
                 .append("svg")
-                .attr("id", "svg")
                 .attr("width", w)
-                .attr("height", h)              
-    
-    // create legend
-    var legend = d3
-    .select("body")
-    .append("div")
-    .attr("id", "legend")
-    .append("ul")
-    .style("color", "orange")
-    .append("li")
-    .append("text")
-    .html("Riders with doping allegations<br>")
-    .style("color", "orange")
-    .append("li")
-    .style("color", "white")
-    .append("text")
-    .html("No doping allegations <br>")
-    .style("color", "white");     
-    
-    var div = d3
+                .attr("height", h)
+
+    var valueX = data.map(x => x.year)
+    maxX = Math.max(...valueX)
+    minX = Math.min(...valueX)
+
+    const valueY = data.map(x => x.month)
+    maxY = Math.max(...valueY)
+    minY = Math.min(...valueY)
+
+    const xScale = d3.scaleLinear()
+    .domain([minX, maxX])
+    .range([0, w - padding*2])
+
+    const yScale = d3.scaleLinear()
+    .domain([maxY, 0])
+    .range([h, padding*2])
+
+    var barWidth = [(w - (padding*2)) / (valueX.length / 12)]
+    var barHeight = (h - (padding*2)) / 12
+
+    var tooltip = d3
     .select('body')
     .append('div')
     .attr('class', 'tooltip')
     .attr('id', 'tooltip')
-    .style('opacity', 0);   
+    .style('opacity', 0);
 
-    var minSecParse = d3.timeParse("%M:%S");
-    var timeFormat = d3.timeFormat("%M:%S");
-
-    // var valueX = data.map(x => parseInt(x[0].split("-")[0]))
-    // maxX = Math.max(...valueX)
-    // minX = Math.min(...valueX)
-
-    // const maxY = d3.max(data, (d) => d[1])
-    
-    var xScale = d3.scaleLinear()
-    .domain([1992, 2017])
-    .range([0, w - padding*2])
-
-    var yScale = d3.scaleTime()
-    .domain([
-    d3.min(data, d => minSecParse(d["Time"])),
-    d3.max(data, d => minSecParse(d["Time"]))
-    ])
-    .range([h, padding*2])
-
-    console.log(minSecParse(data[0].Time))
-
-    var yAxisValues = d3.scaleTime()
-    .domain([
-    d3.max(data, d => (minSecParse(d["Time"]))),
-    d3.min(data, d => (minSecParse(d["Time"])))
-    ])
-    .range([h, padding*2])
-
-    //create circle
-    svg.selectAll("circle")
+    //create heat bars
+    svg.selectAll("rect")
     .data(data)
     .enter()
-    .append("circle")
-    .attr("cx", d => xScale(d.Year) + 50)
-    .attr("cy", d => h - yScale(minSecParse(d["Time"]))+50)
-    .attr("r", 5)
-    .style("fill", function(d) {
-        if (d.Doping) {return "orange"}
-        else return "white"
+    .append("rect")
+    .attr("class", "bar")
+    .attr("x", (d, i) => ((Math.floor(i / 12) + 1) * barWidth) + padding)
+    .attr("y", (d, i) => ((i % 12) * barHeight) + padding)
+    .attr("width", barWidth)
+    .attr("height", barHeight)
+    .attr("fill", (d) => {
+        if (d.variance < -5)
+        return "#751CF1"
+        if (d.variance > -5 && d.variance < -4)
+        return "#301CF1"
+        if (d.variance > -4 && d.variance < -3)
+        return "#1C4AF1"
+        if (d.variance > -3 && d.variance < -2)
+        return "#1C98F1"
+        if (d.variance > -2 && d.variance < -1)
+        return "#1CE9F1"
+        if (d.variance > -1 && d.variance < 0)
+        return "#F1E71C"
+        if (d.variance > 0 && d.variance < 1)
+        return "#F1AF1C"
+        if (d.variance > 1 && d.variance < 2)
+        return "#F1801C"
+        if (d.variance > 2 && d.variance < 3)
+        return "#F1411C"
+        if (d.variance > 3 && d.variance < 4)
+        return "#581845"
+        else return "#c23700"
     })
-    .on("mouseover", function (event, d) {
-        console.log(d); 
-        // console.log(d3.pointer(event))
-        // var x = d3.pointer(event)[0]
-        // var y = d3.pointer(event)[1]
-        div.style("opacity", 1)
-        div.html(d.Name + " "
-        + "(" + d.Nationality + ")" + "<br>" 
-        + "Year:" + " " + d.Year + " " 
-        + "Time: " + d.Time)
-        div.style("left", xScale(d.Year) - 100 + "px")
-        div.style("top", h - yScale(minSecParse(d["Time"])) - 500 + "px")
-        div.style("color", d.Doping? "orange": "black")
+    .on("mouseover", function(event, d) {
+        // console.log(d)
+        tooltip.style("opacity", .75)
+        tooltip.html(d.year + " "
+        + "(" + d.month + ")" + "<br>" 
+        + "Temp:" + " " + (d.variance + 8).toFixed(2) + "&#176; " + "C" + " " + "<br>" 
+        + "Variance: " + d.variance)
+        tooltip.style("left", xScale(d.year) - 250 + "px")
+        tooltip.style("top", yScale(d.month) - 750 + "px")
+        tooltip.style("color", "black")
     })
     .on("mouseout", function(event, d) {
-        div.style("opacity", 0)
+        tooltip.style("opacity", 0)
       })
 
-    // create x axis
-    const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
+    var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    // create x axis // tickFormat used for tick display along axis
+    const xAxis = d3.axis(xScale).tickFormat(d3.format("d"));
     svg.append("g")
     .attr("id", "x-axis")
-    .attr("transform", "translate(50, 450)")
+    .attr("transform", "translate(100 , 500)")
     .call(xAxis);
 
     // create y axis
-    // const yAxis = d3.axisLeft(yScale);
-    var yAxis = d3.axisLeft(yAxisValues).tickFormat(timeFormat);
+    const yAxis = d3.axisLeft(yScale).tickFormat((d, i) => month[month.length - i])
     svg.append("g")
     .attr("id", "y-axis")
-    .attr("transform", "translate(50, -50)")
+    .attr("transform", "translate(100, -100)")
     .call(yAxis);
 
 }

@@ -20,7 +20,9 @@ circle {
 }
 
 rect:hover {
-  fill: orange;
+  fill: rgb(135, 119, 161);
+  stroke: rgb(10, 10, 10);
+  stroke-width: 1px;
 }
 
 g {
@@ -33,11 +35,14 @@ h2 {
   margin: 5px;
 }
 
-h5 {
+h4 {
+  padding-top: 10px;
   margin: 5px;
 }
 
 #legend {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
   font-size: 13px;
   padding: 5px;
   display: flex;
