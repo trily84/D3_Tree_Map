@@ -102,7 +102,7 @@ function createBar(data, baseTemp) {
     var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     // create x axis // tickFormat used for tick display along axis
-    const xAxis = d3.axis(xScale).tickFormat(d3.format("d"));
+    const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
     svg.append("g")
     .attr("id", "x-axis")
     .attr("transform", "translate(100 , 500)")
