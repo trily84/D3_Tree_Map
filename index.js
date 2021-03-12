@@ -1,5 +1,5 @@
 // fetch data from json file
-fetch('/global-temperature.json')
+fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/global-temperature.json')
 	.then(response => response.json())
 	.then(response => {
         const baseTemp = response.baseTemperature
