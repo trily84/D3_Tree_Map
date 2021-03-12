@@ -7,7 +7,6 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
         createBar(data, baseTemp)
     })
 
-
 function createBar(data, baseTemp) { 
 
     // create title using base temperature provided in JSON
@@ -15,14 +14,16 @@ function createBar(data, baseTemp) {
 
     var w = 900
     var h = 600
-    var padding = 100
+    var padding = 75
+    currentWidth = parseInt(d3.select('body').style('width'), 10)
 
     // console.log(data)
 
     // create svg element to contain everything relate to the heat bars
     var svg = d3.select("body")
                 .append("svg")
-                .attr("width", w)
+                .classed("svg-content-responsive", true)
+                .attr("width", currentWidth)
                 .attr("height", h)
 
     var valueX = data.map(x => x.year)
@@ -35,13 +36,13 @@ function createBar(data, baseTemp) {
 
     const xScale = d3.scaleLinear()
     .domain([minX, maxX])
-    .range([0, w - padding*2])
+    .range([0, currentWidth - padding*2])
 
     const yScale = d3.scaleLinear()
     .domain([maxY, 0])
     .range([h, padding*2])
 
-    var barWidth = [(w - (padding*2)) / (valueX.length / 12)]
+    var barWidth = [(currentWidth - (padding*2)) / (valueX.length / 12)]
     var barHeight = (h - (padding*2)) / 12
 
     var tooltip = d3
@@ -69,7 +70,7 @@ function createBar(data, baseTemp) {
         if (d.variance > -4 && d.variance <= -3)
         return "#1C4AF1"
         if (d.variance > -3 && d.variance <= -2)
-        return "#1C98F1"
+        return "#1C98F1" 
         if (d.variance > -2 && d.variance <= -1)
         return "#1CE9F1"
         if (d.variance > -1 && d.variance <= 0)
@@ -105,14 +106,14 @@ function createBar(data, baseTemp) {
     const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
     svg.append("g")
     .attr("id", "x-axis")
-    .attr("transform", "translate(100 , 500)")
+    .attr("transform", "translate(75 , 525)")
     .call(xAxis);
 
     // create y axis
     const yAxis = d3.axisLeft(yScale).tickFormat((d, i) => month[month.length - i])
     svg.append("g")
     .attr("id", "y-axis")
-    .attr("transform", "translate(100, -100)")
+    .attr("transform", "translate(75, -75)")
     .call(yAxis);
 
 }
