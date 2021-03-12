@@ -62,25 +62,25 @@ function createBar(data, baseTemp) {
     .attr("width", barWidth)
     .attr("height", barHeight)
     .attr("fill", (d) => {
-        if (d.variance < -5)
+        if (d.variance <= -5)
         return "#751CF1"
-        if (d.variance > -5 && d.variance < -4)
+        if (d.variance > -5 && d.variance <= -4)
         return "#301CF1"
-        if (d.variance > -4 && d.variance < -3)
+        if (d.variance > -4 && d.variance <= -3)
         return "#1C4AF1"
-        if (d.variance > -3 && d.variance < -2)
+        if (d.variance > -3 && d.variance <= -2)
         return "#1C98F1"
-        if (d.variance > -2 && d.variance < -1)
+        if (d.variance > -2 && d.variance <= -1)
         return "#1CE9F1"
-        if (d.variance > -1 && d.variance < 0)
+        if (d.variance > -1 && d.variance <= 0)
         return "#F1E71C"
-        if (d.variance > 0 && d.variance < 1)
+        if (d.variance > 0 && d.variance <= 1)
         return "#F1AF1C"
-        if (d.variance > 1 && d.variance < 2)
+        if (d.variance > 1 && d.variance <= 2)
         return "#F1801C"
-        if (d.variance > 2 && d.variance < 3)
+        if (d.variance > 2 && d.variance <= 3)
         return "#F1411C"
-        if (d.variance > 3 && d.variance < 4)
+        if (d.variance > 3 && d.variance <= 4)
         return "#581845"
         else return "#c23700"
     })
