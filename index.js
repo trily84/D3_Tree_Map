@@ -16,7 +16,10 @@ function createBar(data, baseTemp) {
     var w = 900
     var h = 600
     var padding = 75
+
     currentWidth = parseInt(d3.select('body').style('width'), 10)
+
+    var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     // console.log(data)
 
@@ -90,18 +93,16 @@ function createBar(data, baseTemp) {
         // console.log(d)
         tooltip.style("opacity", .75)
         tooltip.html(d.year + " "
-        + "(" + d.month + ")" + "<br>" 
+        + "(" + month[d.month - 1] + ")" + "<br>" 
         + "Temp:" + " " + (d.variance + 8).toFixed(2) + "&#176; " + "C" + " " + "<br>" 
         + "Variance: " + d.variance)
-        tooltip.style("left", xScale(d.year) - 250 + "px")
-        tooltip.style("top", yScale(d.month) - 750 + "px")
+        tooltip.style("left", xScale(d.year) - currentWidth/2 + 170 + "px")
+        tooltip.style("top", yScale(d.month) - 725 + "px")
         tooltip.style("color", "black")
     })
     .on("mouseout", function(event, d) {
         tooltip.style("opacity", 0)
       })
-
-    var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     // create x axis // tickFormat used for tick display along axis
     const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
