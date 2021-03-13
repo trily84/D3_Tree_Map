@@ -1,5 +1,5 @@
-# D3_Scatterplot
+# D3_Heat_Map
 
-Scatterplot Visualization using D3 library
+Heat Map Visualization using D3 library
 
-https://trily84.github.io/D3_Scatterplot/
+https://trily84.github.io/D3_Heat_Map/
