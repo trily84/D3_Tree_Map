@@ -7,6 +7,7 @@ fetch('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/maste
         createBar(data, baseTemp)
     })
 
+
 function createBar(data, baseTemp) { 
 
     // create title using base temperature provided in JSON
@@ -117,3 +118,11 @@ function createBar(data, baseTemp) {
     .call(yAxis);
 
 }
+
+// window.addEventListener('resize', createBar)
+// window.addEventListener('resize', function(event) {
+//     createBar(data, baseTemp)
+//     console.log("resize")
+// })
+
+window.onresize = function(){ location.reload(); }
