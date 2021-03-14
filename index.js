@@ -94,7 +94,7 @@ function createBar(data, baseTemp) {
         tooltip.style("opacity", .75)
         tooltip.html(d.year + " "
         + "(" + month[d.month - 1] + ")" + "<br>" 
-        + "Temp:" + " " + (d.variance + 8).toFixed(2) + "&#176; " + "C" + " " + "<br>" 
+        + "Temp:" + " " + (d.variance + 8.66).toFixed(2) + "&#176; " + "C" + " " + "<br>" 
         + "Variance: " + d.variance)
         tooltip.style("left", xScale(d.year) - currentWidth/2 + 170 + "px")
         tooltip.style("top", yScale(d.month) - 725 + "px")
