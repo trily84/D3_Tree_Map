@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  background-color: #fff;
+  background-color: white;
   color: rgb(255, 255, 255);
 }
 
@@ -10,49 +10,61 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #424242;
+  background-color: #ffffff;
   color: #ffffff;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-circle {
-  fill: white;
-}
-
-rect:hover {
-  fill: rgb(135, 119, 161);
-  stroke: rgb(10, 10, 10);
-  stroke-width: 1px;
-}
-
 g {
-  color: white;
-  font-size: 10px;
+  color: black;
+}
+
+path {
+  stroke: rgb(31, 29, 29);
+  stroke-width: 0.25px;
+}
+
+path:hover {
+  fill: rgb(136, 90, 84);
+  stroke: rgb(10, 10, 10);
+  stroke-width: 0.25px;
 }
 
 h2 {
+  color: rgb(51, 83, 131);
   padding-top: 10px;
   margin: 5px;
 }
 
 h4 {
+  color: rgb(51, 83, 131);
+  text-align: center;
   padding-top: 10px;
   margin: 5px;
 }
 
-#legend {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  font-size: 13px;
-  padding: 5px;
+.legend {
+  padding-top: 25px;
+  padding-bottom: 0px;
   display: flex;
-  justify-content: center;
-  align-items: top;
+  font-size: 12px;
+  color: rgb(255, 255, 255);
+}
+
+.bar {
+  width: 50px;
+  height: 25px;
+  text-align: center;
+}
+
+span {
+  display: inline-block;
+  line-height: 25px;
 }
 
 div.tooltip {
-  background-color: white;
-  position: relative;
+  background-color: rgb(183, 207, 200);
+  position: fixed;
   border-radius: 5px;
   padding: 5px;
   justify-content: center;

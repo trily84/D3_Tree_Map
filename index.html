@@ -4,14 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Heat Map Visualization</title>
-  <script src="./index.js"></script>
+  <title>Choropleth Map Visualization</title>
+  <!-- <script src="./index.js"></script> -->
   <link rel="stylesheet" href="./style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js" integrity="sha512-0XfwGD1nxplHpehcSVI7lY+m/5L37PNHDt+DOc7aLFckwPXjnjeA1oeNbru7YeI4VLs9i+ADnnHEhP69C9CqTA==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 </head>
 <body>
-<h2 id="title">Global Average Temperature</h2>
-<h4 id="baseTemp"></h4>
+<h2 id="title">United States Education</h2>
+<h4 id="subtitle">Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)
+</h4>
+<div class="legend">
+  <div id="b0" class="bar"> 
+      <span> 
+        0%
+      </span> 
+    </div> 
+    <div id="b1" class="bar"> 
+      <span> 
+        5%
+      </span> 
+    </div> 
+    <div id="b2" class="bar"> 
+      <span> 
+        10%
+      </span> 
+    </div> 
+    <div id="b3" class="bar"> 
+      <span> 
+        15%
+      </span> 
+    </div> 
+    <div id="b4" class="bar"> 
+      <span> 
+        20%
+      </span> 
+    </div> 
+    <div id="b5" class="bar"> 
+      <span> 
+        30%
+      </span> 
+    </div> 
+    <div id="b6" class="bar"> 
+      <span> 
+        40%
+      </span> 
+    </div> 
+</div>
 <!-- <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script> -->
 </body>
+<script src="./index.js"></script>
 </html>
