@@ -15,19 +15,21 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-g {
-  color: black;
-}
-
-path {
+rect {
   stroke: rgb(31, 29, 29);
   stroke-width: 0.25px;
+  border: 3px solid rgb(39, 46, 105);
 }
 
-path:hover {
-  fill: rgb(136, 90, 84);
+rect:hover {
+  fill: rgb(214, 206, 205);
   stroke: rgb(10, 10, 10);
   stroke-width: 0.25px;
+}
+
+svg {
+  padding-top: 20px;
+  margin: 5px;
 }
 
 h2 {
@@ -43,23 +45,11 @@ h4 {
   margin: 5px;
 }
 
-.legend {
-  padding-top: 25px;
-  padding-bottom: 0px;
-  display: flex;
-  font-size: 12px;
-  color: rgb(255, 255, 255);
-}
-
-.bar {
-  width: 50px;
-  height: 25px;
-  text-align: center;
-}
-
-span {
+text {
   display: inline-block;
-  line-height: 25px;
+  word-wrap: break-word;
+  overflow-x: scroll;
+  font-size: 9px;
 }
 
 div.tooltip {
@@ -67,5 +57,5 @@ div.tooltip {
   position: fixed;
   border-radius: 5px;
   padding: 5px;
-  justify-content: center;
+  font-size: 9px;
 }
