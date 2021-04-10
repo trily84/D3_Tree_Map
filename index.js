@@ -10,6 +10,27 @@
     
 // }
 
+color = [
+  ["2600", "#ba776e"],
+  ["Wii", "#9bafd4"],
+  ["NES", "#c71053"],
+  ["GB", "#9e8942"],
+  ["DS", "#d18ea7"],
+  ["X360", "#79549c"],
+  ["PS4", "#a1b8bf"],
+  ["PS3", "#769eab"],
+  ["PS2", "#457b8c"],
+  ["PS", "#1e6175"],
+  ["SNES", "#6e6f85"],
+  ["GBA", "#cacbde"],
+  ["3DS", "#999177"],
+  ["N64", "#756a45"],
+  ["XB", "#c2a9d9"],
+  ["PC","#856211"],
+  ["PSP", "#5f8769"],
+  ["XOne", "#76de91"]
+  ]
+
 let margin = {top: 10, right: 10, bottom: 10, left: 10},
   width = 900
   height = 600
@@ -53,61 +74,9 @@ d3.json("https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-
       .attr('height', function(d) {return d.y1 - d.y0})
       .style("fill", function(d) {
         // console.log(d.data.category)  
-        var category = d.data.category
-        if (category == "2600") {
-            return "#ba776e"
-        }
-        if (category == "Wii") {
-            return "#9bafd4"
-        }
-        if (category == "NES") {
-            return "#c71053"
-        }
-        if (category == "GB") {
-            return "#9e8942"
-        }
-        if (category == "DS") {
-            return "#d18ea7"
-        }
-        if (category == "X360") {
-            return "#79549c"
-        }
-        if (category == "PS4") {
-            return "#a1b8bf"
-        }
-        if (category == "PS3") {
-            return "#769eab"
-        }
-        if (category == "PS2") {
-            return "#457b8c"
-        }
-        if (category == "PS") {
-            return "#1e6175"
-        }
-        if (category == "SNES") {
-            return "#6e6f85"
-        }
-        if (category == "GBA") {
-            return "#cacbde"
-        }
-        if (category == "3DS") {
-            return "#999177"
-        }
-        if (category == "N64") {
-            return "#756a45"
-        }
-        if (category == "XB") {
-            return "#c2a9d9"
-        }
-        if (category == "PC") {
-            return "#856211"
-        }
-        if (category == "PSP") {
-            return "#5f8769"
-        }
-        if (category == "XOne") {
-            return "#76de91"
-        }
+        var category = d.data.category     
+        found = color.find(element => element[0] == category)
+        return found[1]
       })
       .on("mouseover", function(event, d) {
         // console.log(event.data.name)
@@ -138,23 +107,17 @@ d3.json("https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-
     .attr('x', 4)
     .attr('y', (d, i) => 13 + i * 10)
     .text(d => d)   
-
-
-  let legend = d3.selectAll("legend")
-    .append('g')
-    .selectAll('g')
-    .data(root.leaves())
-    .enter()
-    .append('g')
-    
-    legend  
-    .append("rect")
-        .attr('x', 500)
-        .attr('y', 500)
-        .attr('width', 200)
-        .attr('height', 200)
-        .style("fill", "black")
  
 })
+
+  let b = document.getElementById("legend")
+
+  x = color.map(i => {
+    return '<div' + " " + 'style=background-color:' + i[1] + '>' + i[0] + '</div>'
+  }).join('')
+
+  b.innerHTML = x
+
+
 
 
