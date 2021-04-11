@@ -110,13 +110,13 @@ d3.json("https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-
  
 })
 
-  let b = document.getElementById("legend")
+  let legend = document.getElementById("legend")
 
-  x = color.map(i => {
+  rect = color.map(i => {
     return '<div' + " " + 'style=background-color:' + i[1] + '>' + i[0] + '</div>'
   }).join('')
 
-  b.innerHTML = x
+  legend.innerHTML = rect
 
 
 
