@@ -1,15 +1,3 @@
-// let countyURL = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json"
-// let educationURL = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json"
-
-// let countyData
-// let educationData
-
-// colorData = ["#053959", "#164c6e", "#356685", "#57819c", "#7b9aad", "#9cafba", "#a9bcc7"]
-
-// function createMap() { 
-    
-// }
-
 color = [
   ["2600", "#ba776e"],
   ["Wii", "#9bafd4"],
